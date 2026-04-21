@@ -1,0 +1,30 @@
+cd /mnt/c/RNASeqProject/results/Gene/QR
+#=========================================================================
+
+library(dplyr)
+library(readr)
+library(org.Mm.eg.db)
+
+# 1. Load files
+deg_file <- read_csv("TreatedQ_vs_TreatedR_sig_DEGs.csv")
+obesity_file <- read_csv("obesity_mouse_only.csv")
+
+# 2. Map Ensembl IDs to gene symbols
+deg_file$MGI_symbol <- mapIds(org.Mm.eg.db,
+                              keys = deg_file$gene_id,
+                              column = "SYMBOL",
+                              keytype = "ENSEMBL",
+                              multiVals = "first")
+
+# 3. Merge DEGs with GWAS-obesity mouse file
+merged <- deg_file %>%
+  inner_join(obesity_file, by = "MGI_symbol")
+
+# 4. Save merged shortlist
+write_csv(merged, "Focused_Obesity_Mouse_DEGs.csv")
+
+# 5. Optional: stricter filtering (|log2FC| > 1, padj < 0.05)
+focused <- merged %>%
+  filter(abs(log2FoldChange) > 1, padj < 0.05)
+
+write_csv(focused, "Focused_Obesity_Mouse_DEGs_filtered.csv")
