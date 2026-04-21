@@ -25,11 +25,12 @@ This repository contains the computational pipeline used for transcriptomic anal
 | Q130     | Q501, Q502 |
 ---
 ## ⚙️ Key Parameters
-- Genome: Mus musculus (GRCm39, Ensembl release 111)
+- Genome: Mus musculus (GRCm39, Ensembl release 111) Download: https://www.ensembl.org
 - Quantification: Salmon (quasi-mapping mode)
 - DEG threshold:
   - adjusted p-value < 0.05
   - |log2FC| > 1
+
 --
 ## 📈 Outputs
 - DEG tables (CSV)
