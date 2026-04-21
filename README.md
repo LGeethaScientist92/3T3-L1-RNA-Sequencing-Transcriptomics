@@ -3,9 +3,14 @@ These are codes used for my PhD project to analyse the 16s RNA seqeuncing output
 RNA-seq analysis pipeline for IL-13 rs20541 study
 
 Steps:
-1. Quality control (FastQC)
-2. Quantification (Salmon)
-3. Differential expression (DESeq2)
+Raw FASTQ
+→ FastQC
+→ Trimming
+→ Salmon index
+→ Salmon quantification
+→ tximport in R
+→ DESeq2
+→ Visualisation and enrichment
 4. KEGG enrichment (clusterProfiler)
 5. Visualization (ggplot2, pheatmap)
 
