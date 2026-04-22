@@ -22,12 +22,12 @@ This repository contains the computational pipeline used for transcriptomic anal
 - `TPM Check Script.txt` → QC after running Salmon quantification
 - `run_full_pipeline_safe.R` → Full script from Salmon quant.sf files to DEG, GO & KEGG Outputs
 - `Generate KEGG Plots.txt/Heatmap.txt/PCA plot.R/functional_figure.R` → Create plots
-- `filter_gwas_pipeline.R` → Ensembl  → Mouse annotation → GWAS obesity genes → Ortholog mapping → DEG overlap → Obesity-focused enrichment & plots
-                             ENSEMBL IDs were first converted to the gene symbols extracted from Mouse Genome Informatics (MGI)  (https://www.biotools.fr/mouse/ensembl_symbol_converter),
-                             Mouse phenotype annotations were downloaded from the MGI database (http://www.informatics.jax.org/downloads/reports/),filtered for obesity-related Mammalian Phenotype (MP) terms 
-                             Obesity-associated human genes were retrieved from the NHGRI-EBI-GWAS Catalog (all associations version 1.0, https://www.ebi.ac.uk/gwas/docs/file-downloads)
 - `filter_obesity_genes.R` → using Disgenet (steps same as above)
 - `Shared pathways.txt` → Plot the shared pathways between Mouse & Human
+- `filter_gwas_pipeline.R` → Ensembl  → Mouse annotation → GWAS obesity genes → Ortholog mapping → DEG overlap → Obesity-focused enrichment & plots
+  ENSEMBL IDs were first converted to the gene symbols extracted from Mouse Genome Informatics (MGI)  (https://www.biotools.fr/mouse/ensembl_symbol_converter),
+  Mouse phenotype annotations were downloaded from the MGI database (http://www.informatics.jax.org/downloads/reports/),filtered for obesity-related Mammalian Phenotype (MP) terms 
+  Obesity-associated human genes were retrieved from the NHGRI-EBI-GWAS Catalog (all associations version 1.0, https://www.ebi.ac.uk/gwas/docs/file-downloads)
   
 ## 🧬 Experimental Design
 | Group     | Samples |
