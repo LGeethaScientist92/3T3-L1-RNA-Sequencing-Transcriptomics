@@ -1,0 +1,68 @@
+#open powershell
+#password: 12345
+wsl
+
+#set directory
+cd /mnt/c/Users/lgitu/NewRNA/fastq
+cd /mnt/c/RNASeqProject
+cd /mnt/c/RNASeqProject/results/Gene/LRT
+cd /mnt/c/Users/lgitu/Downloads 
+C:\Users\lgitu\Downloads
+
+#to check files
+ls
+
+# Run in PowerShell as admin
+wsl --install
+
+#update packages
+sudo apt update && sudo apt upgrade -y
+
+#change .txt file into .sh file
+mv run_full_RNAseq_pipeline.txt run_full_RNAseq_pipeline.sh
+
+#Make script QC-> Deseq2 executable
+chmod +x run_RNAseq_pipeline.sh
+
+#Run the script
+bash -x ./run_RNAseq_pipeline.sh
+
+#get the mouse genome
+cd ~/RNASeqProject
+wget https://ftp.ensembl.org/pub/release-111/fasta/mus_musculus/cdna/Mus_musculus.GRCm39.cdna.all.fa.gz -O reference_transcripts.fa.gz
+gunzip reference_transcripts.fa.gz
+
+
+library(tximport)
+  library(DESeq2)
+  library(ggplot2)
+  library(pheatmap)
+  library(RColorBrewer)
+  library(clusterProfiler)
+  library(org.Mm.eg.db)
+  library(enrichplot)
+  library(AnnotationDbi)
+  library(ashr)
+})
+
+Rscript functional_enrichment.R /mnt/c/RNASeqProject/results /mnt/c/RNASeqProject/enrichment_results
+
+Rscript run_full_pipeline_safe.R /mnt/c/RNASeqProject/salmon_quant /mnt/c/RNASeqProject/results
+
+chmod +x run_RNAseq_pipeline.sh
+./run_RNAseq_pipeline.sh
+
+Rscript top30_contrast_heatmaps.R 
+
+ source("filter_obesity_genes.R")
+source("obesity_DEG.R")
+
+cd /mnt/c/RNASeqProject/results/Gene/LRT
+cd /mnt/c/RNASeqProject/results/Gene/ControlQ
+cd /mnt/c/RNASeqProject/results/Gene/ControlR
+cd /mnt/c/RNASeqProject/results/Gene/QR
+
+filter_obesity_genes.R #filterobesitygenesfrommousetohumanfromGWAS--> cn directly run
+
+obesity_DEG  #filterbasedonlog2FCandvolcanoplot--> need to change file name
+
