@@ -14,8 +14,10 @@ This repository contains the computational pipeline used for transcriptomic anal
 - `01_fastqc_trim_quant.sh` → Raw FASTQ → Salmon quantification
 - `02_deseq2_analysis.R` → DESeq2 analysis + DEG output
 - `03_plots_and_enrichment.R` → PCA, heatmaps, volcano, KEGG/GO plots
-### Metadata
-- `samples.csv` → Sample annotation
+---
+### /data
+- `samples.csv` → Sample annotation (Metadata)
+- `functional_assays` → The cell assays results (adipogenesis, lipolysis, glucose uptake)
 ---
 ## /archive
 - `setup_rnaseq_wsl.sh` → Run setup shell
@@ -29,7 +31,7 @@ This repository contains the computational pipeline used for transcriptomic anal
 - ENSEMBL IDs → gene symbols → Mouse Genome Informatics (MGI: https://www.biotools.fr/mouse/ensembl_symbol_converter).
 - Mouse phenotype → MGI database: http://www.informatics.jax.org/downloads/reports/
 - Obesity-associated human genes → NHGRI-EBI-GWAS Catalog (all associations version 1.0, https://www.ebi.ac.uk/gwas/docs/file-downloads).
-  
+---
 ## 🧬 Experimental Design
 | Group     | Samples |
 |----------|--------|
