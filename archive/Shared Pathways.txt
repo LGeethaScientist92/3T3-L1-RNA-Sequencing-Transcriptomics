@@ -1,0 +1,165 @@
+library(tidyverse)
+
+# -----------------------------
+# 1. Load combined KEGG table
+# -----------------------------
+kegg <- read_csv("KEGG_mouse_human_combined.csv", show_col_types = FALSE)
+
+# Expected columns:
+# Pathway, Species, GeneRatio, Count, p.adjust
+
+# -----------------------------
+# 2. Clean / standardize
+# -----------------------------
+clean_pathway <- function(x) {
+  x %>%
+    str_to_lower() %>%
+    str_replace_all("−|–|—", "-") %>%      # normalize dashes
+    str_replace_all("[[:punct:]]", " ") %>% # remove punctuation
+    str_replace_all("\\s+", " ") %>%        # squash spaces
+    str_trim()
+}
+
+kegg <- kegg %>%
+  mutate(
+    Pathway = str_trim(as.character(Pathway)),
+    Species = str_trim(as.character(Species)),
+    Species = case_when(
+      Species %in% c("Mouse", "mouse") ~ "Mouse",
+      Species %in% c("Human", "human") ~ "Human",
+      TRUE ~ Species
+    ),
+    Species = factor(Species, levels = c("Mouse", "Human")),
+    GeneRatio = as.character(GeneRatio),
+    Count = as.numeric(Count),
+    p.adjust = as.numeric(p.adjust),
+    Pathway_clean = clean_pathway(Pathway)
+  )
+
+# -----------------------------
+# 3. Convert GeneRatio if stored as "a/b"
+# -----------------------------
+kegg <- kegg %>%
+  mutate(
+    GeneRatio = ifelse(
+      str_detect(GeneRatio, "/"),
+      sapply(str_split(GeneRatio, "/"), function(x) as.numeric(x[1]) / as.numeric(x[2])),
+      as.numeric(GeneRatio)
+    )
+  )
+
+# -----------------------------
+# 4. Identify shared pathways by cleaned names
+# -----------------------------
+shared_clean <- kegg %>%
+  filter(!is.na(GeneRatio), !is.na(Species), !is.na(Pathway_clean)) %>%
+  group_by(Pathway_clean) %>%
+  summarise(
+    n_species = n_distinct(Species),
+    .groups = "drop"
+  ) %>%
+  filter(n_species == 2) %>%
+  pull(Pathway_clean)
+
+kegg_shared <- kegg %>%
+  filter(Pathway_clean %in% shared_clean)
+
+cat("Number of shared pathways found:", length(unique(kegg_shared$Pathway_clean)), "\n")
+
+# -----------------------------
+# 5. Choose one display label per shared pathway
+#    Prefer Mouse label if available, otherwise first
+# -----------------------------
+display_names <- kegg_shared %>%
+  arrange(Pathway_clean, Species) %>%
+  group_by(Pathway_clean) %>%
+  summarise(
+    DisplayPathway = first(Pathway[Species == "Mouse"], default = first(Pathway)),
+    .groups = "drop"
+  )
+
+kegg_shared <- kegg_shared %>%
+  left_join(display_names, by = "Pathway_clean")
+
+# -----------------------------
+# 6. Rank shared pathways automatically
+#    by mean GeneRatio across species
+# -----------------------------
+top_n <- 15
+
+pathway_rank <- kegg_shared %>%
+  group_by(Pathway_clean, DisplayPathway) %>%
+  summarise(
+    mean_ratio = mean(GeneRatio, na.rm = TRUE),
+    mean_padj = mean(p.adjust, na.rm = TRUE),
+    total_count = sum(Count, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(mean_ratio), mean_padj)
+
+top_shared <- pathway_rank %>%
+  slice_head(n = top_n)
+
+kegg_plot <- kegg_shared %>%
+  filter(Pathway_clean %in% top_shared$Pathway_clean)
+
+# -----------------------------
+# 7. Order pathways for plotting
+# -----------------------------
+pathway_order <- top_shared %>%
+  arrange(mean_ratio) %>%
+  pull(DisplayPathway)
+
+kegg_plot <- kegg_plot %>%
+  mutate(DisplayPathway = factor(DisplayPathway, levels = pathway_order))
+
+# -----------------------------
+# 8. Export the shared pathways actually used
+# -----------------------------
+write_csv(
+  kegg_plot %>%
+    select(DisplayPathway, Pathway, Pathway_clean, Species, GeneRatio, Count, p.adjust),
+  "PanelB_shared_pathways_used.csv"
+)
+
+# -----------------------------
+# 9. Plot Panel B
+# -----------------------------
+p_kegg <- ggplot(kegg_plot, aes(x = GeneRatio, y = DisplayPathway)) +
+  geom_point(
+    aes(size = Count, color = Species),
+    alpha = 0.9
+  ) +
+  scale_color_manual(
+    values = c("Mouse" = "#2C7FB8", "Human" = "#D7301F")
+  ) +
+  scale_size_continuous(range = c(3, 8)) +
+  labs(
+    title = "B  Cross-species KEGG pathway enrichment",
+    x = "Gene ratio",
+    y = NULL,
+    color = NULL,
+    size = "Gene count"
+  ) +
+  theme_classic(base_size = 11) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0),
+    axis.text.y = element_text(size = 9, color = "black"),
+    axis.text.x = element_text(size = 9, color = "black"),
+    axis.title.x = element_text(size = 10, color = "black"),
+    legend.position = "right",
+    legend.text = element_text(size = 9),
+    panel.grid.major.x = element_line(color = "grey85", linewidth = 0.3),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank()
+  )
+
+print(p_kegg)
+
+ggsave(
+  "PanelB_KEGG_shared_mouse_vs_human_clean.png",
+  p_kegg,
+  width = 8,
+  height = 6.5,
+  dpi = 300
+)
