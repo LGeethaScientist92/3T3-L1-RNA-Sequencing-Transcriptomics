@@ -1,0 +1,45 @@
+cd /mnt/c/RNASeqProject/quants
+# Load required package
+library(tximport)
+
+# Define your sample folders
+samples <- c("Q501_S13", "Q502_S14", "R501_S11", "R502_S12", "UnT1_S9", "UnT2_S10")
+
+# Point to the quant.sf files
+files <- file.path("/mnt/c/RNASeqProject/quants", samples, "quant.sf")
+names(files) <- samples  # name each element by sample
+
+# Import Salmon quantifications
+txi <- tximport(files, type = "salmon", txOut = TRUE)
+
+# TPM matrix
+tpm <- txi$abundance
+
+# Check TPM sums per sample (should be ~1e6)
+colSums(tpm)
+
+# Quick preview of TPM table
+head(tpm)
+
+# Number of expressed transcripts (TPM > 1 in at least one sample)
+sum(rowSums(tpm > 1) > 0)
+
+# Top 10 most expressed transcripts per sample
+apply(tpm, 2, function(x) head(sort(x, decreasing = TRUE), 10))
+
+# TPM distribution across samples
+boxplot(log2(tpm + 1), las = 2, main = "TPM distribution across samples")
+
+# Export as PNG
+png("TPM_distribution.png", width = 1200, height = 800)
+boxplot(log2(tpm + 1),
+        las = 2,
+        main = "TPM distribution across samples")
+dev.off()
+
+# Export as PDF (optional)
+pdf("TPM_distribution.pdf", width = 12, height = 8)
+boxplot(log2(tpm + 1),
+        las = 2,
+        main = "TPM distribution across samples")
+dev.off()
