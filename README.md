@@ -55,7 +55,7 @@ This repository contains the computational pipeline used for transcriptomic anal
 ---
 ## 🌍 Data Availability
 RNA-seq data available at:
-NCBI Sequence Read Archive (SRA) submission: SUB16136632
+NCBI Sequence Read Archive (SRA) SUB16136632 under BioProject accession PRJNA1456302
 ---
 ## 👩‍🔬 Author
 Geetha Letchumanan  
