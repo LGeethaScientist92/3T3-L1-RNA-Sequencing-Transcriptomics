@@ -17,7 +17,7 @@ This repository contains the computational pipeline used for transcriptomic anal
 ### Metadata
 - `samples.csv` → Sample annotation
 ---
-## Other Scripts:
+## /archive
 - `setup_rnaseq_wsl.sh` → Run setup shell
 - `TPM Check Script.txt` → QC after running Salmon quantification
 - `run_full_pipeline_safe.R` → Full script from Salmon quant.sf files to DEG, GO & KEGG Outputs
