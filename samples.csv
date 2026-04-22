@@ -1,0 +1,7 @@
+Sample,Organism,Tissue,Condition,Genotype,Files
+UnT1,Mus musculus,Adipocyte,Control,NA,UnT1_S9_R1_001.fastq.gz / UnT1_S9_R2_001.fastq.gz
+UnT2,Mus musculus,Adipocyte,Control,NA,UnT2_S10_R1_001.fastq.gz / UnT2_S10_R2_001.fastq.gz
+R501,Mus musculus,Adipocyte,R130,rs20541 R,R501_S11_R1_001.fastq.gz / R501_S11_R2_001.fastq.gz
+R502,Mus musculus,Adipocyte,R130,rs20541 R,R502_S12_R1_001.fastq.gz / R502_S12_R2_001.fastq.gz
+Q501,Mus musculus,Adipocyte,Q130,rs20541 Q,Q501_S13_R1_001.fastq.gz / Q501_S13_R2_001.fastq.gz
+Q502,Mus musculus,Adipocyte,Q130,rs20541 Q,Q502_S14_R1_001.fastq.gz / Q502_S14_R2_001.fastq.gz
