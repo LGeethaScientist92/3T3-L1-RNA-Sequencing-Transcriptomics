@@ -1,0 +1,78 @@
+assay ,condition,dose,stimulus,replicate,value
+Adipogenesis,Control,0,None,1,100
+Adipogenesis,Control,0,None,2,100
+Adipogenesis,Control,0,None,3,100
+Adipogenesis,R130,25,None,1,74.88
+Adipogenesis,R130,25,None,2,78.98
+Adipogenesis,R130,25,None,3,133.77
+Adipogenesis,R130,50,None,1,88.93
+Adipogenesis,R130,50,None,2,61.3
+Adipogenesis,R130,50,None,3,142.72
+Adipogenesis,R130,100,None,1,109.79
+Adipogenesis,R130,100,None,2,68.94
+Adipogenesis,R130,100,None,3,199.47
+Adipogenesis,Q130,25,None,1,142.27
+Adipogenesis,Q130,25,None,2,86.86
+Adipogenesis,Q130,25,None,3,141.97
+Adipogenesis,Q130,50,None,1,171.39
+Adipogenesis,Q130,50,None,2,80.41
+Adipogenesis,Q130,50,None,3,160.21
+Adipogenesis,Q130,100,None,1,225.82
+Adipogenesis,Q130,100,None,2,84.16
+Adipogenesis,Q130,100,None,3,139.6
+Lipolysis,Control,0,Basal,1,1.98419
+Lipolysis,Control,0,Basal,2,1.95099
+Lipolysis,Control,0,Isoproterenol,1,5.43874
+Lipolysis,Control,0,Isoproterenol,2,5.71067
+Lipolysis,R130,25,Basal,1,2.00158
+Lipolysis,R130,25,Basal,2,1.9747
+Lipolysis,R130,25,Isoproterenol,1,4.29407
+Lipolysis,R130,25,Isoproterenol,2,4.44427
+Lipolysis,R130,50,Basal,1,2.03004
+Lipolysis,R130,50,Basal,2,2.00158
+Lipolysis,R130,50,Isoproterenol,1,5.99368
+Lipolysis,R130,50,Isoproterenol,2,6.46798
+Lipolysis,R130,100,Basal,1,2.17391
+Lipolysis,R130,100,Basal,2,2.13281
+Lipolysis,R130,100,Isoproterenol,1,2.2166
+Lipolysis,R130,100,Isoproterenol,2,2.27194
+Lipolysis,Q130,25,Basal,1,2.28933
+Lipolysis,Q130,25,Basal,2,2.32885
+Lipolysis,Q130,25,Isoproterenol,1,2.22767
+Lipolysis,Q130,25,Isoproterenol,2,2.32411
+Lipolysis,Q130,50,Basal,1,2.04269
+Lipolysis,Q130,50,Basal,2,2.02372
+Lipolysis,Q130,50,Isoproterenol,1,1.96838
+Lipolysis,Q130,50,Isoproterenol,2,1.94466
+Lipolysis,Q130,100,Basal,1,2.06324
+Lipolysis,Q130,100,Basal,2,2.03636
+Lipolysis,Q130,100,Isoproterenol,1,3.56838
+Lipolysis,Q130,100,Isoproterenol,2,3.37549
+Glucose  ,Control,0,Basal,1,11.21
+Glucose,Control,0,Basal,2,0.49
+Glucose  ,Control,0,Insulin ,1,43.11
+Glucose,Control,0,Insulin ,2,36.25
+Glucose  ,R130,25,Basal,1,7.89
+Glucose,R130,25,Basal,2,8.75
+Glucose  ,R130,25,Insulin ,1,18.35
+Glucose,R130,25,Insulin ,2,25.99
+Glucose  ,R130,50,Basal,1,6.04
+Glucose,R130,50,Basal,2,6.73
+Glucose  ,R130,50,Insulin ,1,23.07
+Glucose,R130,50,Insulin ,2,22.95
+Glucose  ,R130,100,Basal,1,3.41
+Glucose,R130,100,Basal,2,3.79
+Glucose  ,R130,100,Insulin ,1,24.58
+Glucose,R130,100,Insulin ,2,39.19
+Glucose  ,Q130,25,Basal,1,6.9
+Glucose,Q130,25,Basal,2,7.79
+Glucose  ,Q130,25,Insulin ,1,39.78
+Glucose,Q130,25,Insulin ,2,27.62
+Glucose  ,Q130,50,Basal,1,9.21
+Glucose,Q130,50,Basal,2,10.22
+Glucose  ,Q130,50,Insulin ,1,22.01
+Glucose,Q130,50,Insulin ,2,28.66
+Glucose  ,Q130,100,Basal,1,8.46
+Glucose,Q130,100,Basal,2,9.48
+Glucose  ,Q130,100,Insulin ,1,0.44
+Glucose,Q130,100,Insulin ,2,29.38
