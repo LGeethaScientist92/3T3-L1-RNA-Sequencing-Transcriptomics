@@ -26,9 +26,9 @@ This repository contains the computational pipeline used for transcriptomic anal
 - `Shared pathways.txt` → Plot the shared pathways between Mouse & Human
 - `filter_gwas_pipeline.R` → Ensembl → Mouse annotation → GWAS obesity genes → Ortholog mapping → DEG overlap → Plots
   
-  ENSEMBL IDs → gene symbols extracted from Mouse Genome Informatics (MGI: https://www.biotools.fr/mouse/ensembl_symbol_converter).
-  Mouse phenotype → MGI database: http://www.informatics.jax.org/downloads/reports/ ,filtered for obesity-related Mammalian Phenotype (MP) terms. 
-  Obesity-associated human genes → NHGRI-EBI-GWAS Catalog (all associations version 1.0, https://www.ebi.ac.uk/gwas/docs/file-downloads).
+- ENSEMBL IDs → gene symbols → Mouse Genome Informatics (MGI: https://www.biotools.fr/mouse/ensembl_symbol_converter).
+- Mouse phenotype → MGI database: http://www.informatics.jax.org/downloads/reports/
+- Obesity-associated human genes → NHGRI-EBI-GWAS Catalog (all associations version 1.0, https://www.ebi.ac.uk/gwas/docs/file-downloads).
   
 ## 🧬 Experimental Design
 | Group     | Samples |
