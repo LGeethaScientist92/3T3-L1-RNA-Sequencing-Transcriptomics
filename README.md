@@ -24,7 +24,7 @@ This repository contains the computational pipeline used for transcriptomic anal
 - `Generate KEGG Plots.txt/Heatmap.txt/PCA plot.R/functional_figure.R` → Create plots
 - `filter_obesity_genes.R` → using Disgenet (steps same as above)
 - `Shared pathways.txt` → Plot the shared pathways between Mouse & Human
-- `filter_gwas_pipeline.R` → Ensembl → Mouse annotation → GWAS obesity genes → Ortholog mapping → DEG overlap → Obesity-focused enrichment & plots
+- `filter_gwas_pipeline.R` → Ensembl → Mouse annotation → GWAS obesity genes → Ortholog mapping → DEG overlap 
   ENSEMBL IDs → gene symbols extracted from Mouse Genome Informatics (MGI: https://www.biotools.fr/mouse/ensembl_symbol_converter).
   Mouse phenotype → MGI database: http://www.informatics.jax.org/downloads/reports/ ,filtered for obesity-related Mammalian Phenotype (MP) terms. 
   Obesity-associated human genes → NHGRI-EBI-GWAS Catalog (all associations version 1.0, https://www.ebi.ac.uk/gwas/docs/file-downloads).
@@ -53,10 +53,6 @@ This repository contains the computational pipeline used for transcriptomic anal
 ## 🌍 Data Availability
 RNA-seq data available at:
 NCBI Sequence Read Archive (SRA) submission: SUB16136632
----
-## 📦 Notes
-Additional exploratory scripts 
-
 ---
 ## 👩‍🔬 Author
 Geetha Letchumanan  
